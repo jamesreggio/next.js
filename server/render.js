@@ -202,8 +202,14 @@ function errorToJSON (err) {
 }
 
 function serializeError (dev, err) {
-  if (dev) {
-    return errorToJSON(err)
+  if (dev || err.public) {
+    const json = errorToJSON(err)
+
+    if (!dev) {
+      delete json.stack
+    }
+
+    return Object.assign(json, err)
   }
 
   return { message: '500 - Internal Server Error.' }
