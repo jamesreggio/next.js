@@ -202,7 +202,7 @@ function errorToJSON (err) {
 }
 
 function serializeError (dev, err) {
-  if (dev) {
+  if (dev || err.public) {
     return errorToJSON(err)
   }
 
